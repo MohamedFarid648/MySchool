@@ -1,0 +1,40 @@
+﻿@model IEnumerable<MySchoolV1.Models.UserSubject>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+           User Name
+        </th>
+        <th>
+           Course Name
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+
+            @MySchoolV1.Models.User.returnUserName(item.UserID)
+        </td>
+        <td>
+            @MySchoolV1.Models.Subject.returnSubjectName(item.SubjectID)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>
