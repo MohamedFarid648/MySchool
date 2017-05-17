@@ -10,6 +10,7 @@ using MySchoolV1.Models;
 
 namespace MySchoolV1.Controllers
 {
+    [Authorize]
     public class UsersController : Controller
     {
         private DBContextClass db = new DBContextClass();
