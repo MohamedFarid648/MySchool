@@ -56,8 +56,22 @@ namespace MySchoolV1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Name,Email,Password,ConfirmPassword,Gender,DateOfBirth,Address,PhoneNumber,UserTypeID")] User user)
         {
+
             if (ModelState.IsValid)
             {
+                if (db.Users.Any(x => x.Email == user.Email))
+                {
+
+                    ModelState.AddModelError("Email", "User Email is already exist");
+                    // Response.Write("Error:<br/><font color='red'>User Email is already exist</font>");
+
+
+                }
+            }
+
+                if (ModelState.IsValid)
+            {
+
                 db.Users.Add(user);
                 db.SaveChanges();
                 return RedirectToAction("Index");

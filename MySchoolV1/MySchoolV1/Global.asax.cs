@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -12,6 +13,17 @@ namespace MySchoolV1
     {
         protected void Application_Start()
         {
+
+
+            /*
+             To Solve error:
+             * The model backing the 'Context Class' context has changed since the database was created. 
+             * Consider using Code First Migrations to update the database
+         
+             */
+            Database.SetInitializer<MySchoolV1.Models.DBContextClass>(null);
+            /*End*/
+
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

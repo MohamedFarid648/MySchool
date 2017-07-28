@@ -12,5 +12,8 @@ namespace MySchoolV1.Models
         public DbSet<UserType> UserTypes { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<UserSubject> UserSubjects { get; set; }
+        public DbSet<Question> Questions { get; set; }
+        public DbSet<Answer> Answers { get; set; }
+
     }
 }

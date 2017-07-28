@@ -26,10 +26,13 @@
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                   @if (Request.IsAuthenticated)
                   {
-                    <li>@Html.ActionLink("Students", "Index", "Users")</li>
+                    <li>@Html.ActionLink("Users", "Index", "Users")</li>
                     <li>@Html.ActionLink("Subjects", "Index", "Subjects")</li>
-                    <li>@Html.ActionLink("Student Subjects", "Index", "UserSubjects")</li>
+                    <li>@Html.ActionLink("Users Subjects", "Index", "UserSubjects")</li>
                     <li>@Html.ActionLink("User Types ", "Index", "UserTypes")</li>
+                    <li>@Html.ActionLink("Add Question ", "Create", "Questions")</li>
+                    <li>@Html.ActionLink("Questions", "Index", "Questions")</li>
+
 
                   }
                 </ul>
