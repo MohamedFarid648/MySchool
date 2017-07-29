@@ -30,9 +30,11 @@
  *@
 
   @using (Html.BeginForm("Create", "Questions", FormMethod.Post)) { @*Html.AntiForgeryToken()*@    <div class="row">
-        <div class="col-lg-12">
-            <textarea name="Question" cols="20" placeholder="Write Question Please"></textarea>
-        </div>
+        <div class="col-lg-10">
+            @Html.TextAreaFor(model => model.Text, new { htmlAttributes = new { @class = "QuestiontextArea" } })
+            
+            @*  <textarea name="Question" class="QuestiontextArea" cols="20" placeholder="Write Question Please"></textarea> *@
+         </div>
     </div>
 
     <div class="row">
@@ -81,6 +83,6 @@
     @Scripts.Render("~/Scripts/RadioButtonValue.js")
     @Scripts.Render("~/Scripts/AddAnotherAnswer.js")
     @Scripts.Render("~/Scripts/DeleteAnswer.js")
+    @*@Scripts.Render("~/Scripts/TinyMCE.js")*@
+
 }
-
-

@@ -11,9 +11,7 @@
 </p>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.userID)
-        </th>
+        
         <th>
             @Html.DisplayNameFor(model => model.Text)
         </th>
@@ -22,11 +20,9 @@
 
 @foreach (var item in Model) {
     <tr>
+        
         <td>
-            @Html.DisplayFor(modelItem => item.userID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Text)
+            @Html.TextAreaFor(modelItem => item.Text,new { @readonly = "readonly" })
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |

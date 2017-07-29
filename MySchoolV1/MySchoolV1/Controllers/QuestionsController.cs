@@ -54,6 +54,7 @@ namespace MySchoolV1.Controllers
         // POST: Questions/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [ValidateInput(false)]
         [HttpPost]
        // [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,userID,Text")] Question question)
@@ -61,36 +62,44 @@ namespace MySchoolV1.Controllers
             ViewBag.answerNames = Request.Form.GetValues("the_answer");
             ViewBag.answerScores = Request.Form.GetValues("Score");
             ViewBag.rightAnswer = Request.Form.Get("right_answer");
-
-
-            //Add the Question
-            Question question2 = new Question();
-            question2.Text= Request.Form.Get("Question"); 
-            db.Questions.Add(question2);
-            db.SaveChanges();
-
-            //Get Question ID
-            ViewBag.QuestioniID = question2.ID;
-
-
-            //Add Answers to the Question
-            for (int i = 0; i < ViewBag.answerNames.Length; i++)
+           // string QuestionText = Request.Form.Get("Question");
+            if (!String.IsNullOrEmpty(question.Text))
             {
-
-                Answer answerObject = new Answer();
-                answerObject.QuestionID= question2.ID;
-                answerObject.Score = Convert.ToInt32(ViewBag.answerScores[i]);
-                answerObject.Text = ViewBag.answerNames[i];
-
-                //We suppuse that first answer is right answer
-                if (i == 0)//ViewBag.rightAnswer == "on"
-                {
-                    answerObject.RightAnswer = 1;
-                }
-                
-                db.Answers.Add(answerObject);
+                //Add the Question
+                Question question2 = new Question();
+                question2.Text = question.Text;
+                db.Questions.Add(question2);
                 db.SaveChanges();
+
+                //Get Question ID
+                ViewBag.QuestioniID = question2.ID;
+
+
+                //Add Answers to the Question
+                for (int i = 0; i < ViewBag.answerNames.Length; i++)
+                {
+
+
+                    if (!String.IsNullOrEmpty(ViewBag.answerNames[i]))
+                    {
+                        Answer answerObject = new Answer();
+                        answerObject.QuestionID = question2.ID;
+                        answerObject.Score = Convert.ToInt32(ViewBag.answerScores[i]);
+                        answerObject.Text = ViewBag.answerNames[i];
+
+                        //We suppuse that first answer is right answer
+                        if (i == 0)//ViewBag.rightAnswer == "on"
+                        {
+                            answerObject.RightAnswer = 1;
+                        }
+
+                        db.Answers.Add(answerObject);
+                        db.SaveChanges();
+                    }
+
+                }
             }
+           
             return RedirectToAction("Index"); 
           // return View(question2);
         }

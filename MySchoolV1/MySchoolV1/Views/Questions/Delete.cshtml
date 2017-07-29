@@ -24,7 +24,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Text)
+            @Html.TextAreaFor(model => model.Text, new { htmlAttributes = new { @readonly = "readonly" } })
         </dd>
 
     </dl>
