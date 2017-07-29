@@ -84,7 +84,9 @@ namespace MySchoolV1.Controllers
             {
                 db.Entry(answer).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                // return RedirectToAction("Index");
+                return RedirectToAction("Details", "Questions", new { id = answer.QuestionID });
+
             }
             return View(answer);
         }
@@ -112,7 +114,9 @@ namespace MySchoolV1.Controllers
             Answer answer = db.Answers.Find(id);
             db.Answers.Remove(answer);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", "Questions", new { id = answer.QuestionID });
+
+            //return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

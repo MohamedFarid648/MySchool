@@ -6,15 +6,32 @@
 
 <h2>Create</h2>
 
-
-@using (Html.BeginForm("Create","Questions", FormMethod.Get))
-{
-    @*Html.AntiForgeryToken()*@
+@{
 
 
-    <div class="row">
+/**/
+}@*
+    @if (HttpContext.Current.Request.HttpMethod == "POST")
+    {
+        for (int i = 0; i < ViewBag.answerNames.Length; i++)
+        {
+
+            <p class="lead">
+                Answer: @ViewBag.answerNames[i] ||
+                Score: @ViewBag.answerScores[i]
+            </p>
+        }
+
+           <p class="lead"> Right Answer: @Request.Form.Get("right_answer")</p>
+           <p class="lead"> QID: @ViewBag.QuestioniID</p>
+
+
+    }
+ *@
+
+  @using (Html.BeginForm("Create", "Questions", FormMethod.Post)) { @*Html.AntiForgeryToken()*@    <div class="row">
         <div class="col-lg-12">
-            <textarea name="Question"></textarea>
+            <textarea name="Question" cols="20" placeholder="Write Question Please"></textarea>
         </div>
     </div>
 
@@ -39,7 +56,7 @@
                 <input type="number" width="20" placeholder="Score" name="Score" />
             </div>
             <div class="col-lg-2">
-                |<input type="button" class="btn delete_answer" value="Delete" />
+                <input type="button" class="btn delete_answer" value="Delete" />
             </div>
         </div>
 
@@ -61,6 +78,7 @@
 @section Scripts {
     @Scripts.Render("~/Scripts/jquery-1.10.2.min.js")
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/RadioButtonValue.js")
     @Scripts.Render("~/Scripts/AddAnotherAnswer.js")
     @Scripts.Render("~/Scripts/DeleteAnswer.js")
 }
